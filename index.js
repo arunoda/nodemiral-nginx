@@ -21,6 +21,9 @@ exports.install = function(vars, taskListOptions) {
 exports.configure = function(vars, taskListOptions) {
   var taskList = nodemiral.taskList('HaProxy Configuration', taskListOptions);
 
+  // set load balacing algorithm 
+  vars.hash = vars.hash || "md5";
+
   taskList.copy('upstart', {
     src: path.resolve(__dirname, 'templates/nginx.init.conf'),
     dest: '/etc/init/nginx.conf'
